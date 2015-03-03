@@ -2,10 +2,10 @@ package com.stemfbla.sentio;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
-public class MainActivity extends ActionBarActivity {
+public class HomeActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_home);
     }
 }
