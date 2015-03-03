@@ -3,8 +3,8 @@
   <component name="AndroidDexCompilerConfiguration">
     <option name="MAX_HEAP_SIZE" value="512" />
   </component>
-  <component name="ProjectDictionaryState">
-    <dictionary name="Apoorv" />
+  <component name="EntryPointsManager">
+    <entry_points version="2.0" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
