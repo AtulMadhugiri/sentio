@@ -13,18 +13,32 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
         CalendarFragment.OnFragmentInteractionListener, ClubsFragment.OnFragmentInteractionListener {
 
     private NavigationDrawerFragment mNavigationDrawerFragment;
+    private DrawerLayout mDrawerLayout;
+    private android.support.v4.app.ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
-
-        // Set up the drawer.
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerToggle = new android.support.v4.app.ActionBarDrawerToggle(this,
+                mDrawerLayout,
+                R.drawable.ic_drawer, 1, 1) {
+            public void onDrawerClosed(android.view.View view) {
+                super.onDrawerClosed(view);
+                getActionBar().setTitle(mTitle);
+                invalidateOptionsMenu();
+            }
+            public void onDrawerOpened(android.view.View drawerView) {
+                super.onDrawerOpened(drawerView);
+                getActionBar().setTitle(mTitle);
+                invalidateOptionsMenu();
+            }
+        };
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
@@ -72,4 +86,11 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     }
     @Override
     public void onFragmentInteraction(android.net.Uri uri) { }
+
+    @Override
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
+        if (mDrawerToggle.onOptionsItemSelected(item))
+            return true;
+        return super.onOptionsItemSelected(item);
+    }
 }
