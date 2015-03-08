@@ -26,8 +26,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
         mTitle = getTitle();
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerToggle = new android.support.v4.app.ActionBarDrawerToggle(this,
-                mDrawerLayout,
-                R.drawable.ic_drawer, 1, 1) {
+                mDrawerLayout, R.drawable.ic_drawer, 1, 1) {
             public void onDrawerClosed(android.view.View view) {
                 super.onDrawerClosed(view);
                 getActionBar().setTitle(mTitle);
@@ -78,18 +77,20 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                 break;
         }
     }
+
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
     }
+
     @Override
     public void onFragmentInteraction(android.net.Uri uri) { }
 
     @Override
     public boolean onOptionsItemSelected(android.view.MenuItem item) {
-        if (mDrawerToggle.onOptionsItemSelected(item))
+        if(mDrawerToggle.onOptionsItemSelected(item))
             return true;
         return super.onOptionsItemSelected(item);
     }
