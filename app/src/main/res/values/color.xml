@@ -21,9 +21,6 @@
     <color name = "material_deep_orange_100">#ffccbc</color>
     <color name = "material_deep_orange_500">#ff5722</color>
     <color name = "material_deep_orange_700">#e64a19</color>
-    <color name = "material_blue_grey_100">#cfd8dc</color>
-    <color name = "material_blue_grey_500">#607d8b</color>
-    <color name = "material_blue_grey_700">#455a64</color>
     <color name = "material_text_primary">#de000000</color>
     <color name = "material_icon">#8a000000</color>
     <color name = "material_background">#fffafafa</color>
