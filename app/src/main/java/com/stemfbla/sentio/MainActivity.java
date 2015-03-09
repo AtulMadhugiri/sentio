@@ -9,7 +9,7 @@ import android.support.v7.app.ActionBarActivity;
 
 public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment
         .NavigationDrawerCallbacks, HomeFragment.OnFragmentInteractionListener,
-        CalendarFragment.OnFragmentInteractionListener, ClubsFragment.OnFragmentInteractionListener {
+        ClubsFragment.OnFragmentInteractionListener {
 
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private DrawerLayout mDrawerLayout;
