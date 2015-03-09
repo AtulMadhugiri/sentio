@@ -5,7 +5,7 @@
     <string name="title_section3">Clubs</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_club_page">ClubPageActivity</string>
-
+    <string name="name"><b>Name:</b></string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
@@ -40,7 +40,7 @@
         <item>Caeli MacLennan</item>
         <item>Sonia Murthy</item>
         <item>Maya Ganesan</item>
-        <item>Meena Meyyappan</item>
+        <item>Sonia Murthy</item>
         <item>Teri Guo</item>
         <item>Udit Ranasaria</item>
         <item>Nivi Thomas</item>
@@ -58,7 +58,7 @@
         <item>s-cmaclennan@lwsd.org</item>
         <item>s-smurthy@lwsd.org</item>
         <item>mayaganesan@gmail.com</item>
-        <item>s-mmeyyappan@lwsd.org</item>
+        <item>s-somurthy@lwsd.org</item>
         <item>s-tguo@lwsd.org</item>
         <item>s-uranasaria@lwsd.org</item>
         <item>s-nthomas@lwsd.org</item>

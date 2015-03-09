@@ -52,7 +52,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                 break;
             case 1:
                 getSupportActionBar().setTitle("Calendar");
-                com.roomorama.caldroid.CaldroidFragment calFragment = new com.roomorama.caldroid
+                final com.roomorama.caldroid.CaldroidFragment calFragment = new com.roomorama.caldroid
                         .CaldroidFragment();
                 Bundle args = new Bundle();
                 java.util.Calendar cal = java.util.Calendar.getInstance();
@@ -66,8 +66,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                 fragmentManager.beginTransaction()
                         .replace(R.id.calendar, calFragment)
                         .commit();
-                android.widget.ListView eventList = (android.widget.ListView) findViewById(R.id
-                        .listView);
                 final com.roomorama.caldroid.CaldroidListener listener = new com.roomorama.caldroid.CaldroidListener() {
                     @Override
                     public void onSelectDate(java.util.Date date, android.view.View view) {

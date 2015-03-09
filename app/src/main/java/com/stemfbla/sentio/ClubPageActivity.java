@@ -1,7 +1,10 @@
 package com.stemfbla.sentio;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.View;
 
 
 public class ClubPageActivity extends ActionBarActivity {
@@ -12,17 +15,23 @@ public class ClubPageActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_club_page);
-        int clubNumber = Integer.parseInt(getIntent().getExtras().getString("page"));
+        final int clubNumber = Integer.parseInt(getIntent().getExtras().getString("page"));
         String[] description = getResources().getStringArray(R.array.description_array);
         android.widget.TextView desc = (android.widget.TextView) findViewById(R.id.description);
         String[] name = getResources().getStringArray(R.array.cname_array);
         android.widget.TextView nameText = (android.widget.TextView) findViewById(R.id.name);
-        String[] mail = getResources().getStringArray(R.array.cmail_array);
+        final String[] mail = getResources().getStringArray(R.array.cmail_array);
         android.widget.TextView mailText = (android.widget.TextView) findViewById(R.id
                 .emailaddress);
         desc.setText(description[clubNumber]);
         nameText.setText(name[clubNumber]);
         mailText.setText(mail[clubNumber]);
+        mailText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("mailto://" + mail[clubNumber])));
+            }
+        });
         sliderShow = (com.daimajia.slider.library.SliderLayout) findViewById(R.id.clubSlider);
         java.util.ArrayList<Integer> file_maps = new java.util.ArrayList<Integer>();
         switch(clubNumber) {
