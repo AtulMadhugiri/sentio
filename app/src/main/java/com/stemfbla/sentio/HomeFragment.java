@@ -32,7 +32,7 @@ public class HomeFragment extends Fragment {
         int file_maps[] = new int[6];
             file_maps[0] = R.drawable.stem3;
             file_maps[1] = R.drawable.stem1;
-            file_maps[2] = R.drawable.stem0;
+            file_maps[2] = R.drawable.stem6;
             file_maps[3] = R.drawable.stem2;
             file_maps[4] = R.drawable.stem4;
             file_maps[5] = R.drawable.stem5;
