@@ -66,6 +66,15 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                 fragmentManager.beginTransaction()
                         .replace(R.id.calendar, calFragment)
                         .commit();
+                final com.roomorama.caldroid.CaldroidListener listener = new com.roomorama.caldroid.CaldroidListener() {
+                    @Override
+                    public void onSelectDate(java.util.Date date, android.view.View view) {
+                        android.widget.Toast.makeText(getApplicationContext(), date.toString(),
+                                android.widget.Toast.LENGTH_SHORT).show();
+                    }
+                };
+                calFragment.setCaldroidListener(listener);
+                calFragment.refreshView();
                 break;
             case 2:
                 getSupportActionBar().setTitle("Clubs");
