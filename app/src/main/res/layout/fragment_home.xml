@@ -5,8 +5,8 @@
              tools:context="com.stemfbla.sentio.HomeFragment">
     <com.daimajia.slider.library.SliderLayout
         android:id="@+id/slider"
-        android:layout_width="300dp"
-        android:layout_height="142dp"
+        android:layout_width="340dp"
+        android:layout_height="200dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="54dp"/>
