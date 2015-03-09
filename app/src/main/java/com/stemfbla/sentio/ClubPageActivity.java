@@ -24,12 +24,12 @@ public class ClubPageActivity extends ActionBarActivity {
         android.widget.TextView mailText = (android.widget.TextView) findViewById(R.id
                 .emailaddress);
         desc.setText(description[clubNumber]);
-        nameText.setText(name[clubNumber]);
+        nameText.setText(name[clubNumber] + ":");
         mailText.setText(mail[clubNumber]);
         mailText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("mailto://" + mail[clubNumber])));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + mail[clubNumber])));
             }
         });
         sliderShow = (com.daimajia.slider.library.SliderLayout) findViewById(R.id.clubSlider);
