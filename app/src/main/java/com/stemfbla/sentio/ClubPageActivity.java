@@ -9,5 +9,6 @@ public class ClubPageActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_club_page);
+        int clubNumber = getIntent().getExtras().getInt("page");
     }
 }
