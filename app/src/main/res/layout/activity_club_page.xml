@@ -6,17 +6,13 @@
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingTop="@dimen/activity_vertical_margin"
                 android:paddingBottom="@dimen/activity_vertical_margin"
-                tools:context="com.stemfbla.sentio.ClubPageActivity"
-    android:id="@+id/">
+                tools:context="com.stemfbla.sentio.ClubPageActivity" >
     <com.daimajia.slider.library.SliderLayout
         android:id="@+id/clubSlider"
         android:layout_width="340dp"
         android:layout_height="200dp"
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true" />
-
-
-
 
     <TextView
         android:layout_width="wrap_content"
@@ -28,7 +24,7 @@
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
         android:textColor="@color/colorPrimary"
-        android:singleline="true"
+        android:singleLine="true"
         android:textSize="30dp" />
 
     <TextView
@@ -39,7 +35,7 @@
         android:id="@+id/emailaddress"
         android:textStyle="italic"
         android:textColor="@color/material_text_primary"
-        android:singleline="true"
+        android:singleLine="true"
         android:textSize="22dp"
         android:layout_below="@+id/name"
         android:layout_alignLeft="@+id/name"
@@ -53,7 +49,7 @@
         android:id="@+id/name"
         android:textStyle="normal"
         android:textColor="@color/material_text_primary"
-        android:singleline="true"
+        android:singleLine="true"
         android:textSize="22dp"
         android:layout_marginTop="59dp"
         android:layout_below="@+id/description"
@@ -68,7 +64,7 @@
         android:id="@+id/meetingtimes"
         android:textStyle="normal"
         android:textColor="@color/material_text_primary"
-        android:singleline="true"
+        android:singleLine="true"
         android:textSize="28dp"
         android:layout_below="@+id/emailaddress"
         android:layout_alignLeft="@+id/emailaddress"
@@ -83,11 +79,10 @@
         android:id="@+id/daytime"
         android:textStyle="normal"
         android:textColor="@color/material_text_primary"
-        android:singleline="true"
+        android:singleLine="true"
         android:textSize="20dp"
         android:layout_below="@+id/meetingtimes"
         android:layout_alignLeft="@+id/meetingtimes"
         android:layout_alignStart="@+id/meetingtimes" />
-
 
 </RelativeLayout>

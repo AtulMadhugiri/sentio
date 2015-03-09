@@ -1,7 +1,10 @@
 package com.stemfbla.sentio;
 
 public class CalendarFragment extends android.support.v4.app.Fragment {
+
     private OnFragmentInteractionListener mListener;
+    android.widget.ListView EventList;
+
     public static CalendarFragment newInstance() {
         CalendarFragment fragment = new CalendarFragment();
         return fragment;
