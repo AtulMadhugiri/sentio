@@ -9,17 +9,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Calendar Fragment"/>
-    <CalendarView
-        android:layout_width = "fill_parent"
-        android:layout_height = "fill_parent"
-        android:id = "@+id/calendarView"
-        android:layout_alignParentLeft = "true"
-        android:layout_alignParentStart = "true"
-        android:layout_alignParentRight = "true"
-        android:layout_alignParentEnd = "true"
-        android:showWeekNumber = "false"
-        android:selectedDateVerticalBar="@color/colorPrimary"
-        android:selectedWeekBackgroundColor="@color/material_indigo_100"
-        android:weekSeparatorLineColor="@color/colorPrimary"/>
 
 </FrameLayout>
