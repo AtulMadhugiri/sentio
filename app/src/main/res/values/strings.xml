@@ -4,17 +4,36 @@
     <string name="title_section2">Calendar</string>
     <string name="title_section3">Clubs</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_club_page">ClubPageActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_example">Example action</string>
+    <string-array name="description_array">
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+    </string-array>
 
-    <string name="action_settings">Settings</string>
+    <string-array name="cname_array">
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+    </string-array>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_club_page">ClubPageActivity</string>
+    <string-array name="cmail_array">
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+    </string-array>
 
-    <string name="hello_world">Hello world!</string>
+    <string-array name="meeting_array">
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+    </string-array>
 </resources>
