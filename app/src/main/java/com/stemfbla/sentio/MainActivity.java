@@ -1,14 +1,13 @@
 package com.stemfbla.sentio;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 
-
 public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment
         .NavigationDrawerCallbacks, HomeFragment.OnFragmentInteractionListener,
+        CalendarFragment.OnFragmentInteractionListener,
         ClubsFragment.OnFragmentInteractionListener {
 
     private NavigationDrawerFragment mNavigationDrawerFragment;
@@ -41,31 +40,49 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment fragment;
+        Fragment fragment = null;
+        boolean okay = true;
         switch(position) {
             default:
             case 0:
                 getSupportActionBar().setTitle("Home");
-                fragment = new HomeFragment();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, new HomeFragment())
+                        .commit();
                 break;
             case 1:
                 getSupportActionBar().setTitle("Calendar");
-                fragment = new com.roomorama.caldroid.CaldroidFragment();
+                com.roomorama.caldroid.CaldroidFragment calFragment = new com.roomorama.caldroid
+                        .CaldroidFragment();
                 Bundle args = new Bundle();
                 java.util.Calendar cal = java.util.Calendar.getInstance();
                 args.putInt(com.roomorama.caldroid.CaldroidFragment.MONTH, cal.get(java.util.Calendar.MONTH) + 1);
                 args.putInt(com.roomorama.caldroid.CaldroidFragment.YEAR, cal.get(java.util.Calendar.YEAR));
-                fragment.setArguments(args);
-
+                calFragment.setArguments(args);
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, new CalendarFragment())
+                        .commit();
+                okay = false;
+                fragmentManager.beginTransaction()
+                        .replace(R.id.calendar, calFragment)
+                        .commit();
+                final com.roomorama.caldroid.CaldroidListener listener = new com.roomorama.caldroid.CaldroidListener() {
+                    @Override
+                    public void onSelectDate(java.util.Date date, android.view.View view) {
+                        android.widget.Toast.makeText(getApplicationContext(), date.toString(),
+                                android.widget.Toast.LENGTH_SHORT).show();
+                    }
+                };
+                calFragment.setCaldroidListener(listener);
+                calFragment.refreshView();
                 break;
             case 2:
                 getSupportActionBar().setTitle("Clubs");
-                fragment = new ClubsFragment();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, new ClubsFragment())
+                        .commit();
                 break;
         }
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, fragment)
-                .commit();
     }
 
     @Override
