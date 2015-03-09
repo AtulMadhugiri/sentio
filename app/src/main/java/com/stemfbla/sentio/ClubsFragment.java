@@ -9,11 +9,10 @@ import android.view.ViewGroup;
 
 public class ClubsFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
-    public static HomeFragment newInstance() {
-        HomeFragment fragment = new HomeFragment();
+    public static ClubsFragment newInstance() {
+        ClubsFragment fragment = new ClubsFragment();
         return fragment;
     }
-
     public ClubsFragment() { }
 
     @Override
