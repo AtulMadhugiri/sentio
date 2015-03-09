@@ -56,6 +56,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                 args.putInt(com.roomorama.caldroid.CaldroidFragment.MONTH, cal.get(java.util.Calendar.MONTH) + 1);
                 args.putInt(com.roomorama.caldroid.CaldroidFragment.YEAR, cal.get(java.util.Calendar.YEAR));
                 fragment.setArguments(args);
+
                 break;
             case 2:
                 getSupportActionBar().setTitle("Clubs");
