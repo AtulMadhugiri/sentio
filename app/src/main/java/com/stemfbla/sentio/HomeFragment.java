@@ -44,8 +44,6 @@ public class HomeFragment extends Fragment {
                     .image(file_maps[a])
                     .setScaleType(com.daimajia.slider.library.SliderTypes.BaseSliderView.ScaleType.Fit);
             sliderShow.addSlider(textSliderView);
-
-
         }
         return view;
     }
