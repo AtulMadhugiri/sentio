@@ -31,7 +31,7 @@
         android:text="email address"
         android:id="@+id/emailaddress"
         android:textStyle="italic"
-        android:textColor="@color/material_teal_500"
+        android:textColor="#009688"
         android:singleLine="true"
         android:textSize="15dp"
         android:layout_marginLeft="5dp"

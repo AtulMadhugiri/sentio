@@ -50,9 +50,9 @@ public class ClubPageActivity extends ActionBarActivity {
             case 2:
                 getSupportActionBar().setTitle("FBLA");
                 file_maps.add(R.drawable.fbla1);
-                file_maps.add(R.drawable.fbla2);
-                file_maps.add(R.drawable.fbla3);
                 file_maps.add(R.drawable.fbla4);
+                file_maps.add(R.drawable.fbla3);
+                file_maps.add(R.drawable.fbla2);
                 break;
             case 3:
                 getSupportActionBar().setTitle("HOSA");
