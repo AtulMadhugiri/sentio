@@ -5,5 +5,5 @@
           android:choiceMode="singleChoice"
           android:divider="@color/material_divider"
           android:dividerHeight="1dp"
-          android:background="#05b8cc"
+          android:background="#DCEDC8"
           tools:context="com.stemfbla.sentio.NavigationDrawerFragment" />
