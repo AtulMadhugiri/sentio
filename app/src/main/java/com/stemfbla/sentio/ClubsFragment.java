@@ -17,21 +17,17 @@ public class ClubsFragment extends android.support.v4.app.ListFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        String[] values = new String[] { "Envirostories",
-                "Ethics Bowl",
-                "Future Business Leaders of America",
-                "HOSA Future Health Professionals",
-                "Link Crew",
-                "Math Club",
-                "Model United Nations",
-                "National Art Honor Society",
-                "National Honor Society",
-                "Peer Tutor Lab",
-                "PHASER",
-                "Quantum Robotics",
-                "Relay for Life",
-                "Science Bowl",
-                "Technology Student Association" };
+        String[] values = new String[0];
+        try {
+            values = new String[com.stemfbla.sentio.SchoolActivity.schoolData.getJSONArray("clubs").length()];
+            for(int a = 0; a < values.length; a++) {
+                values[a] = com.stemfbla.sentio.SchoolActivity.schoolData.getJSONArray("clubs")
+                        .getJSONObject(a).getString("club_name");
+            }
+        } catch(org.json.JSONException e) {
+            e.printStackTrace();
+        }
+
         android.widget.ArrayAdapter<String> adapter = new android.widget.ArrayAdapter<String>(getActivity(),
                     android.R.layout.simple_list_item_1, values);
             setListAdapter(adapter);
@@ -40,7 +36,20 @@ public class ClubsFragment extends android.support.v4.app.ListFragment {
         @Override
         public void onListItemClick(android.widget.ListView l, View v, int position, long id) {
             android.content.Intent x = new android.content.Intent(getActivity(), ClubPageActivity.class);
-            x.putExtra("page", String.valueOf(position));
+            int clubId = -1;
+            try {
+                for(int a = 0; a < SchoolActivity.schoolData.getJSONArray
+                        ("clubs").length(); a++) {
+                    if(SchoolActivity.schoolData.getJSONArray("clubs").getJSONObject(a).getString
+                            ("club_name").equals(
+                            ((String)l.getItemAtPosition(position))))
+                        clubId = com.stemfbla.sentio.SchoolActivity.schoolData.getJSONArray("clubs")
+                                .getJSONObject(a).getInt("club_id");
+                }
+            } catch(org.json.JSONException e) {
+                e.printStackTrace();
+            }
+            x.putExtra("page", clubId);
             startActivity(x);
         }
 

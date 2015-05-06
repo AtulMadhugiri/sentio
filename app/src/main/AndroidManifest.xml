@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.stemfbla.sentio" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,6 +20,15 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".SchoolActivity"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:screenOrientation="portrait" >
@@ -28,12 +40,36 @@
         <activity
             android:name=".ClubPageActivity"
             android:label="@string/title_activity_club_page"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".FacultyActivity"
+            android:label="@string/title_activity_faculty"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.stemfbla.sentio.MainActivity" />
+        </activity>
+        <activity
+            android:name=".MemberActivity"
+            android:label="@string/title_activity_member"
+            android:parentActivityName=".FacultyActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.stemfbla.sentio.FacultyActivity" />
+        </activity>
+        <activity
+            android:name=".FacebookActivity"
+            android:label="@string/title_activity_facebook"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.stemfbla.sentio.MainActivity" />
         </activity>
     </application>
 

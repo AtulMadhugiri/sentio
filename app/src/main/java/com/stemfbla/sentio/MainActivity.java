@@ -1,11 +1,14 @@
 package com.stemfbla.sentio;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 
-public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment
+import java.util.Calendar;
+
+public class MainActivity extends android.support.v7.app.ActionBarActivity implements
+        NavigationDrawerFragment
         .NavigationDrawerCallbacks, HomeFragment.OnFragmentInteractionListener,
         CalendarFragment.OnFragmentInteractionListener,
         ClubsFragment.OnFragmentInteractionListener {
@@ -41,7 +44,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     public void onNavigationDrawerItemSelected(int position) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment = null;
-        boolean okay = true;
         switch(position) {
             default:
             case 0:
@@ -57,12 +59,11 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                 Bundle args = new Bundle();
                 java.util.Calendar cal = java.util.Calendar.getInstance();
                 args.putInt(com.roomorama.caldroid.CaldroidFragment.MONTH, cal.get(java.util.Calendar.MONTH) + 1);
-                args.putInt(com.roomorama.caldroid.CaldroidFragment.YEAR, cal.get(java.util.Calendar.YEAR));
+                args.putInt(com.roomorama.caldroid.CaldroidFragment.YEAR, cal.get(Calendar.YEAR));
                 calFragment.setArguments(args);
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, new CalendarFragment())
                         .commit();
-                okay = false;
                 fragmentManager.beginTransaction()
                         .replace(R.id.calendar, calFragment)
                         .commit();

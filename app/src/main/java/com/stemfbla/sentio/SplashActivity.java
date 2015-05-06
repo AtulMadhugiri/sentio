@@ -7,13 +7,16 @@ public class SplashActivity extends Activity {
     @Override
     protected void onCreate(android.os.Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /** App begins here **/
         setContentView(R.layout.activity_splash);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashActivity.this, com.stemfbla.sentio.MainActivity.class));
+                // Start Login page
+                startActivity(new Intent(SplashActivity.this, SchoolActivity.class));
                 finish();
             }
-        }, 2000);
+        }, (getSharedPreferences("sharedPrefs", /** Skip splash screen if logged out */
+                android.content.Context.MODE_PRIVATE).contains("school_code") ? 1500 : 0));
     }
 }

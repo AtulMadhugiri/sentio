@@ -3,16 +3,16 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              tools:context="com.stemfbla.sentio.CalendarFragment">
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/calendar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
-    </RelativeLayout>
-    <TextView
+    </LinearLayout>
+
+    <ListView
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:id="@+id/eventView"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/calendar"
-        android:layout_centerHorizontal="true"/>
+        android:id="@+id/calendarList"/>
 </RelativeLayout>

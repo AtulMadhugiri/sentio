@@ -2,14 +2,14 @@ apply plugin:'com.android.application'
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "21.1.2"
+    buildToolsVersion "22.0.1"
 
     defaultConfig {
         applicationId "com.stemfbla.sentio"
         minSdkVersion 11
         targetSdkVersion 21
         versionCode 1
-        versionName "1.0"
+        versionName "1.9"
     }
     buildTypes {
         release {
@@ -27,4 +27,5 @@ dependencies {
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.daimajia.slider:library:1.1.2@aar'
     compile 'com.roomorama:caldroid:1.1.8'
+    compile 'com.cocosw:bottomsheet:1.+@aar'
 }
