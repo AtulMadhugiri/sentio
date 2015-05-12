@@ -1,20 +1,16 @@
 package com.stemfbla.sentio;
+
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.File;
+import java.util.ArrayList;
+
 public class HomeFragment extends Fragment {
-
-    private OnFragmentInteractionListener mListener;
-
-    public static HomeFragment newInstance() {
-        HomeFragment fragment = new HomeFragment();
-        return fragment;
-    }
 
     public HomeFragment() { }
 
@@ -30,27 +26,16 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         android.widget.TextView schoolName = (android.widget.TextView) view.findViewById(com.stemfbla.sentio.R.id.textView);
         android.widget.TextView schoolDescription = (android.widget.TextView) view.findViewById(R.id.textView9);
+        ArrayList<File> imageList = new ArrayList<File>();
         try {
             schoolName.setText(SchoolActivity.schoolData.getString("school_name"));
             schoolDescription.setText(SchoolActivity.schoolData.getString("description"));
-        } catch(org.json.JSONException e) {
-            e.printStackTrace();
-        }
-        java.util.ArrayList<java.io.File> imageList = new java.util.ArrayList<java.io.File>();
-        try {
-                if(!SchoolActivity.schoolData.getString("logo").equals("")) imageList.add
-                        (SchoolActivity.saveImage
-                                (getActivity(),
-                                        SchoolActivity
-                                                .schoolData.getString
-                                                ("logo")));
-            for(int a = 0; a < SchoolActivity.schoolData.getJSONArray("images")
-                    .length(); a++) {
+            if(!SchoolActivity.schoolData.getString("logo").equals("")) imageList.add
+                    (SchoolActivity.saveImage(getActivity(), SchoolActivity.schoolData.getString("logo")));
+            for(int a = 0; a < SchoolActivity.schoolData.getJSONArray("images").length(); a++) {
                 if(SchoolActivity.schoolData.getJSONArray("images").getJSONObject(a).getInt
                         ("club_id") == 0) imageList.add(SchoolActivity.saveImage(getActivity(),
-                        SchoolActivity
-                                .schoolData.getJSONArray("images")
-                                .getJSONObject(a).getString("image_data")));
+                        SchoolActivity.schoolData.getJSONArray("images").getJSONObject(a).getString("image_data")));
             }
         } catch(org.json.JSONException e) {
             e.printStackTrace();
@@ -71,23 +56,16 @@ public class HomeFragment extends Fragment {
         }
         return view;
     }
-
     @Override
     public void onCreateOptionsMenu(android.view.Menu menu, android.view.MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         try {
-            menu.add(android.view.Menu.NONE,
-                    0,
-                    android.view.Menu.NONE,
-                    "Facebook Group")
-                    .setIcon(com.stemfbla.sentio.R.drawable.ic_action_group)
-                    .setShowAsAction(android.view.MenuItem.SHOW_AS_ACTION_ALWAYS);
             if(com.stemfbla.sentio.SchoolActivity.schoolData.getJSONArray("faculty").length() != 0) {
                 menu.add(android.view.Menu.NONE,
                         1,
                         android.view.Menu.NONE,
                         "Faculty Members")
-                        .setIcon(com.stemfbla.sentio.R.drawable.vector_member)
+                        .setIcon(R.drawable.ic_action_group)
                         .setShowAsAction(android.view.MenuItem.SHOW_AS_ACTION_ALWAYS);
             }
             menu.add(android.view.Menu.NONE,
@@ -115,36 +93,16 @@ public class HomeFragment extends Fragment {
             }
         } else if(item.toString().equals("Faculty Members")) {
             startActivity(new android.content.Intent(getActivity(), FacultyActivity.class));
-        } else if(item.toString().equals("Facebook Group")) {
-            startActivity(new android.content.Intent(getActivity(), FacebookActivity.class));
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public void onButtonPressed(Uri uri) {
-        if(mListener != null) {
-            mListener.onFragmentInteraction(uri);
-
-        }
     }
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch(ClassCastException e) {
-            throw new ClassCastException(activity.toString() + " must implement " +
-                    "OnFragmentInteractionListener");
-        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-        public void onFragmentInteraction(Uri uri);
     }
 }

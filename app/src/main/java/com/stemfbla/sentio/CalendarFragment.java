@@ -1,11 +1,27 @@
 package com.stemfbla.sentio;
 
-public class CalendarFragment extends android.support.v4.app.Fragment {
+import android.app.AlertDialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.provider.CalendarContract;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.view.LayoutInflater;
+import android.view.View;
 
-    private OnFragmentInteractionListener mListener;
+import com.melnykov.fab.FloatingActionButton;
+import com.roomorama.caldroid.CaldroidFragment;
+
+import org.json.JSONException;
+
+public class CalendarFragment extends Fragment {
     private android.widget.ListView mListView;
+    //private FloatingActionButton fab;
     java.util.ArrayList<com.stemfbla.sentio.CalendarData> data;
     com.stemfbla.sentio.CalendarArrayAdapter adapter;
+
+    public CalendarFragment() {}
 
     @Override
     public void onCreate(android.os.Bundle savedInstanceState) {
@@ -14,18 +30,21 @@ public class CalendarFragment extends android.support.v4.app.Fragment {
     }
 
     @Override
-    public android.view.View onCreateView(android.view.LayoutInflater inflater, android.view.ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, android.view.ViewGroup container,
                                           android.os.Bundle savedInstanceState) {
-        android.view.View rootView = inflater.inflate(R.layout.fragment_calendar, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_calendar, container, false);
         mListView = (android.widget.ListView) rootView.findViewById(com.stemfbla.sentio.R.id
                 .calendarList);
+        //fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
+        //fab.attachToListView(mListView);
+        //fab.hide();
         data = new java.util.ArrayList<CalendarData>();
         lAll();
         adapter = new CalendarArrayAdapter(getActivity(), data);
         mListView.setAdapter(adapter);
         mListView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(android.widget.AdapterView<?> parent, android.view.View view,
+            public void onItemClick(android.widget.AdapterView<?> parent, final View view,
                                     int position, long id) {
                 try {
                     for(int a = 0; a < SchoolActivity.schoolData.getJSONArray
@@ -33,12 +52,35 @@ public class CalendarFragment extends android.support.v4.app.Fragment {
                         if(SchoolActivity.schoolData.getJSONArray("events").getJSONObject(a)
                                 .getString("event_name").equals(((android.widget.TextView)view.findViewById(com.stemfbla.sentio.R
                                         .id.event_name)).getText().toString())) {
-                            new android.app.AlertDialog.Builder(getActivity())
-                                    .setTitle(((android.widget.TextView)view.findViewById(com.stemfbla.sentio.R
-                                            .id.event_name)).getText().toString() + " Description")
-                                    .setMessage(SchoolActivity.schoolData.getJSONArray("events").getJSONObject(a)
-                                            .getString("description"))
-                                    .show();
+                            final int x = a;
+                            View layout = inflater.inflate(R.layout.event_dialog, null);
+                            new AlertDialog.Builder(getActivity())
+                                    .setView(layout).setTitle(
+                                    ((android.widget.TextView) view.findViewById(
+                                            com.stemfbla.sentio.R.id.event_name)).getText().toString() + " Description")
+                                    .setMessage(SchoolActivity.schoolData.getJSONArray(
+                                            "events").getJSONObject(a).getString("description"))
+                                            .show();
+                            FloatingActionButton fab = (FloatingActionButton) layout.findViewById(R.id.fab);
+                            fab.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    try {
+                                        Intent calIntent = new Intent(Intent.ACTION_INSERT);
+                                        calIntent.setType("vnd.android.cursor.item/event");
+                                        calIntent.putExtra(CalendarContract.Events.TITLE,
+                                                ((android.widget.TextView) view.findViewById(
+                                                        com.stemfbla.sentio.R.id.event_name)).getText().toString());
+                                        calIntent.putExtra(CalendarContract.Events.EVENT_LOCATION, SchoolActivity.schoolData.getString(
+                                                "school_name"));
+                                        calIntent.putExtra(CalendarContract.Events.DESCRIPTION, SchoolActivity.schoolData.getJSONArray(
+                                                "events").getJSONObject(x).getString("description"));
+                                        startActivity(calIntent);
+                                    } catch(JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
                             break;
                         }
                     }
@@ -48,8 +90,8 @@ public class CalendarFragment extends android.support.v4.app.Fragment {
 
             }
         });
-        com.roomorama.caldroid.CaldroidFragment caldroidFragment = new com.roomorama.caldroid.CaldroidFragment();
-        android.os.Bundle args = new android.os.Bundle();
+        CaldroidFragment caldroidFragment = new com.roomorama.caldroid.CaldroidFragment();
+        Bundle args = new android.os.Bundle();
         java.util.Calendar cal = java.util.Calendar.getInstance();
         args.putInt(com.roomorama.caldroid.CaldroidFragment.MONTH, cal.get(java.util.Calendar.MONTH) + 1);
         args.putInt(com.roomorama.caldroid.CaldroidFragment.YEAR, cal.get(java.util.Calendar.YEAR));
@@ -79,17 +121,18 @@ public class CalendarFragment extends android.support.v4.app.Fragment {
                 try {
                     org.json.JSONArray array = SchoolActivity.schoolData.getJSONArray("events");
                     for(int a = 0; a < array.length(); a++) {
-                        if(new java.text.SimpleDateFormat("yyyy-MM-dd").format
-                                (new java.text.SimpleDateFormat("EEE MMM d k:m:s z yyyy").parse(date.toString())).equals(array.getJSONObject(a)
-                                .getString
-                                        ("date_time").substring(0, array.getJSONObject(a).getString("date_time")
-                                        .indexOf(" "))))
-                            data.add(new CalendarData(SchoolActivity.schoolData.getJSONArray("events")
-                                    .getJSONObject(a).getString("event_name"),
-                                    SchoolActivity.schoolData.getJSONArray("events").getJSONObject(a)
-                                            .getString("club_name"), new hirondelle.date4j.DateTime
-                                    (SchoolActivity.schoolData.getJSONArray("events").getJSONObject(a)
-                                            .getString("date_time"))));
+                        if(new java.text.SimpleDateFormat("yyyy-MM-dd").format(
+                                new java.text.SimpleDateFormat("EEE MMM d k:m:s z yyyy").parse(
+                                        date.toString())).equals(
+                                array.getJSONObject(a).getString("date_time").substring(0,
+                                        array.getJSONObject(a).getString("date_time").indexOf(
+                                                " ")))) data.add(new CalendarData(
+                                SchoolActivity.schoolData.getJSONArray("events").getJSONObject(
+                                        a).getString("event_name"),
+                                SchoolActivity.schoolData.getJSONArray("events").getJSONObject(
+                                        a).getString("club_name"), new hirondelle.date4j.DateTime(
+                                SchoolActivity.schoolData.getJSONArray("events").getJSONObject(
+                                        a).getString("date_time"))));
                     }
                 } catch(org.json.JSONException e) {
                     e.printStackTrace();
@@ -99,8 +142,8 @@ public class CalendarFragment extends android.support.v4.app.Fragment {
                 mListView.invalidateViews();
             }
         });
-        android.support.v4.app.FragmentManager fragManager = getActivity().getSupportFragmentManager();
-        android.support.v4.app.FragmentTransaction t = fragManager.beginTransaction();
+        FragmentManager fragManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction t = fragManager.beginTransaction();
         t.replace(R.id.calendar, caldroidFragment);
         t.commit();
         return rootView;
@@ -117,11 +160,10 @@ public class CalendarFragment extends android.support.v4.app.Fragment {
 
     @Override
     public boolean onOptionsItemSelected(android.view.MenuItem item) {
-        if(item.toString().equals("All Events")) {
-            lAll();
-        }
+        if(item.toString().equals("All Events")) lAll();
         return super.onOptionsItemSelected(item);
     }
+
     public void lAll() {
         data.removeAll(data);
         try {
@@ -138,30 +180,12 @@ public class CalendarFragment extends android.support.v4.app.Fragment {
         }
         mListView.invalidateViews();
     }
-    public void onButtonPressed(android.net.Uri uri) {
-        if(mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
     @Override
     public void onAttach(android.app.Activity activity) {
         super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch(ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
     }
-
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-        public void onFragmentInteraction(android.net.Uri uri);
     }
 }

@@ -2,6 +2,7 @@ package com.stemfbla.sentio;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 
@@ -11,6 +12,10 @@ public class ClubPageActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_club_page);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.club_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
         final int clubNumber = getIntent().getExtras().getInt("page");
         android.widget.TextView desc = (android.widget.TextView) findViewById(R.id.description);
         android.widget.TextView nameText = (android.widget.TextView) findViewById(R.id.name);

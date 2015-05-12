@@ -1,6 +1,8 @@
 package com.stemfbla.sentio;
 
-public class CalendarArrayAdapter extends android.widget.ArrayAdapter<com.stemfbla.sentio.CalendarData> {
+import android.widget.ArrayAdapter;
+
+public class CalendarArrayAdapter extends ArrayAdapter<CalendarData> {
     private final android.content.Context context;
     private final java.util.ArrayList<com.stemfbla.sentio.CalendarData> values;
 

@@ -2,6 +2,8 @@ package com.stemfbla.sentio;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
+import android.widget.ListView;
 
 
 public class FacultyActivity extends ActionBarActivity {
@@ -9,7 +11,11 @@ public class FacultyActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faculty);
-        android.widget.ListView facultyList = (android.widget.ListView) findViewById(com.stemfbla
+        Toolbar toolbar = (Toolbar) findViewById(R.id.fac_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        ListView facultyList = (android.widget.ListView) findViewById(com.stemfbla
                 .sentio.R
                 .id.facultyList);
         String[] values = new String[0];
@@ -24,7 +30,7 @@ public class FacultyActivity extends ActionBarActivity {
             e.printStackTrace();
         }
         android.widget.ArrayAdapter<String> adapter = new android.widget.ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, values);
+                R.layout.list_clubs, values);
         facultyList.setAdapter(adapter);
         facultyList.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
             @Override

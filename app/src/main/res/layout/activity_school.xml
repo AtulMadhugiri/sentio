@@ -11,9 +11,11 @@
         android:id="@+id/editText"
         android:textAlignment="center"
         android:text="STEM"
+        android:singleLine="true"
         android:textColor="#E8EAF6"
-        android:textColorHint="@color/colorAccent"
-        android:layout_above="@+id/button"
+        android:layout_marginTop="15dp"
+        android:maxLength="4"
+        android:layout_below="@+id/imageView"
         android:layout_centerHorizontal="true"/>
 
     <Button
@@ -21,14 +23,18 @@
         android:layout_height="wrap_content"
         android:text="Submit"
         android:id="@+id/button"
-        android:layout_marginBottom="50dp"
-        android:layout_above="@+id/offline_button"
-        android:layout_centerHorizontal="true"/>
+        android:textColor="@color/black"
+        android:layout_marginTop="15dp"
+        android:width="115dp"
+        android:height="60dp"
+        android:layout_below="@+id/editText"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Offline Mode"
+        android:textColor="@color/black"
         android:id="@+id/offline_button"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"

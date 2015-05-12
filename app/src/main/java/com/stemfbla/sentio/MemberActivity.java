@@ -2,23 +2,29 @@ package com.stemfbla.sentio;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-
+import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
 public class MemberActivity extends ActionBarActivity {
     int objNum;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_member);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.mem_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
         objNum = getIntent().getExtras().getInt("position");
         try {
-            getSupportActionBar().setTitle(SchoolActivity.schoolData.getJSONArray
-                    ("faculty").getJSONObject(objNum).getString("faculty_name"));
+            getSupportActionBar().setTitle(
+                    SchoolActivity.schoolData.getJSONArray("faculty").getJSONObject(
+                            objNum).getString("faculty_name"));
         } catch(org.json.JSONException e) {
             e.printStackTrace();
         }
-
-        android.widget.TextView roleText = (android.widget.TextView) findViewById(com.stemfbla.sentio.R.id
+        TextView roleText = (android.widget.TextView) findViewById(com.stemfbla.sentio.R.id
                 .roleText);
         byte[] decodedString = new byte[0];
         try {

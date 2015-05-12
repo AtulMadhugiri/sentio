@@ -4,8 +4,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.preference.PreferenceManager;
+import android.util.Base64;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -14,11 +18,18 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.json.JSONArray;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+
 public class SchoolActivity extends Activity {
     // SharedPreferences denote if logged-in
     public static android.content.SharedPreferences sharedpreferences;
     // JSON Object data accessed by rest of application
     public static org.json.JSONObject schoolData;
+    public static boolean offline = false;
     EditText schoolCode;
 
     @Override
@@ -26,9 +37,8 @@ public class SchoolActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_school);
         ConnectionDetector cd = new ConnectionDetector(getApplicationContext());
-
         // Check for entered school-code
-        sharedpreferences = getSharedPreferences("sharedPrefs",android.content.Context.MODE_PRIVATE);
+        sharedpreferences = PreferenceManager.getDefaultSharedPreferences(SchoolActivity.this);
 
         // Check for Internet access
         if(!cd.isConnectingToInternet()) {
@@ -41,13 +51,13 @@ public class SchoolActivity extends Activity {
             offlineMode(1, 0);
         }
 
-        schoolCode = (android.widget.EditText) findViewById(com
+        schoolCode = (EditText) findViewById(com
                 .stemfbla
                 .sentio.R.id.editText);
-        android.widget.Button offline = (android.widget.Button) findViewById(com.stemfbla.sentio
+        Button offline = (android.widget.Button) findViewById(com.stemfbla.sentio
                 .R.id.offline_button);
-        android.widget.Button submit = (android.widget.Button) findViewById(com.stemfbla.sentio.R.id.button);
-        android.widget.ImageView schoolhouse = (android.widget.ImageView) findViewById(com.stemfbla
+        Button submit = (android.widget.Button) findViewById(com.stemfbla.sentio.R.id.button);
+        ImageView schoolhouse = (android.widget.ImageView) findViewById(com.stemfbla
                 .sentio.R.id.imageView2);
 
         // Click on schoolhouse for school list
@@ -74,6 +84,7 @@ public class SchoolActivity extends Activity {
         });
     }
     public void offlineMode(int mode, int out) {
+        if(out == 1) offline = true;
         if(mode == 0) {
             try {
                 java.io.InputStream input = getAssets().open("stem.json");
@@ -88,9 +99,9 @@ public class SchoolActivity extends Activity {
             }
         } else {
             try {
-                java.io.FileInputStream fin = openFileInput("data.json");
-                java.io.InputStreamReader isr = new java.io.InputStreamReader(fin);
-                java.io.BufferedReader bufferedReader = new java.io.BufferedReader(isr);
+                FileInputStream fin = openFileInput("data.json");
+                InputStreamReader isr = new java.io.InputStreamReader(fin);
+                BufferedReader bufferedReader = new java.io.BufferedReader(isr);
                 StringBuilder sb = new StringBuilder();
                 String line;
                 while ((line = bufferedReader.readLine()) != null)
@@ -107,17 +118,15 @@ public class SchoolActivity extends Activity {
                 e.printStackTrace();
             }
         }
-        if(out == 1) android.widget.Toast.makeText(getApplicationContext(), "Offline mode enabled!",
-                android.widget.Toast.LENGTH_SHORT).show();
         startActivity(new android.content.Intent(SchoolActivity.this, MainActivity.class));
         finish();
     }
-    public static java.io.File saveImage(final android.content.Context context, final String imageData) throws java.io.IOException {
+    public static File saveImage(final android.content.Context context, final String imageData) throws java.io.IOException {
         final byte[] imgBytesData = android.util.Base64.decode(imageData,
-                android.util.Base64.DEFAULT);
+                Base64.DEFAULT);
 
-        final java.io.File file = java.io.File.createTempFile("image", null, context.getCacheDir());
-        final java.io.FileOutputStream fileOutputStream;
+        final File file = File.createTempFile("image", null, context.getCacheDir());
+        final FileOutputStream fileOutputStream;
         try {
             fileOutputStream = new java.io.FileOutputStream(file);
         } catch (java.io.FileNotFoundException e) {
