@@ -54,13 +54,13 @@ public class MemberActivity extends ActionBarActivity {
                 1,
                 android.view.Menu.NONE,
                 "Teacher Email")
-                .setIcon(R.drawable.email)
+                .setIcon(R.drawable.ic_action_email)
                 .setShowAsAction(android.view.MenuItem.SHOW_AS_ACTION_ALWAYS);
         menu.add(android.view.Menu.NONE,
                 0,
                 android.view.Menu.NONE,
                 "Teacher Biography")
-                .setIcon(com.stemfbla.sentio.R.drawable.information)
+                .setIcon(R.drawable.ic_action_information)
                 .setShowAsAction(android.view.MenuItem.SHOW_AS_ACTION_ALWAYS);
         return true;
     }

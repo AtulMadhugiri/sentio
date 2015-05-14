@@ -39,7 +39,7 @@ public class SchoolActivity extends Activity {
         ConnectionDetector cd = new ConnectionDetector(getApplicationContext());
         // Check for entered school-code
         sharedpreferences = PreferenceManager.getDefaultSharedPreferences(SchoolActivity.this);
-
+        offline = false;
         // Check for Internet access
         if(!cd.isConnectingToInternet()) {
             if(sharedpreferences.contains("school_code")) {
@@ -51,14 +51,10 @@ public class SchoolActivity extends Activity {
             offlineMode(1, 0);
         }
 
-        schoolCode = (EditText) findViewById(com
-                .stemfbla
-                .sentio.R.id.editText);
-        Button offline = (android.widget.Button) findViewById(com.stemfbla.sentio
-                .R.id.offline_button);
-        Button submit = (android.widget.Button) findViewById(com.stemfbla.sentio.R.id.button);
-        ImageView schoolhouse = (android.widget.ImageView) findViewById(com.stemfbla
-                .sentio.R.id.imageView2);
+        schoolCode = (EditText) findViewById(R.id.editText);
+        Button offline = (android.widget.Button) findViewById(R.id.offline_button);
+        Button submit = (android.widget.Button) findViewById(R.id.button);
+        ImageView schoolhouse = (android.widget.ImageView) findViewById(R.id.imageView2);
 
         // Click on schoolhouse for school list
         schoolhouse.setOnClickListener(new android.view.View.OnClickListener() {
@@ -79,7 +75,7 @@ public class SchoolActivity extends Activity {
         submit.setOnClickListener(new android.view.View.OnClickListener() {
             @Override
             public void onClick(android.view.View v) {
-                new SyncData().execute(new String[]{schoolCode.getText().toString()});
+                new SyncData().execute(schoolCode.getText().toString());
             }
         });
     }
@@ -122,9 +118,7 @@ public class SchoolActivity extends Activity {
         finish();
     }
     public static File saveImage(final android.content.Context context, final String imageData) throws java.io.IOException {
-        final byte[] imgBytesData = android.util.Base64.decode(imageData,
-                Base64.DEFAULT);
-
+        final byte[] imgBytesData = android.util.Base64.decode(imageData, Base64.DEFAULT);
         final File file = File.createTempFile("image", null, context.getCacheDir());
         final FileOutputStream fileOutputStream;
         try {

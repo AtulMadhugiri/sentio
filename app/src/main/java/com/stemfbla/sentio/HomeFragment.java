@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment {
                     2,
                     android.view.Menu.NONE,
                     "School Information")
-                    .setIcon(com.stemfbla.sentio.R.drawable.information)
+                    .setIcon(R.drawable.ic_action_information)
                     .setShowAsAction(android.view.MenuItem.SHOW_AS_ACTION_ALWAYS);
         } catch(org.json.JSONException e) {
             e.printStackTrace();
